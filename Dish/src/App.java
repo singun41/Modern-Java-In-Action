@@ -65,5 +65,11 @@ public class App {
         Map<Boolean, Dish> mostCaloricPartitionedByVegetarian = menu.stream().collect(Collectors.partitioningBy(Dish::isVegetarian, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)), Optional::get)));
         System.out.println(mostCaloricPartitionedByVegetarian);
         System.out.println(System.lineSeparator());
+
+        System.out.println(menu.stream().collect(Collectors.partitioningBy(Dish::isVegetarian, Collectors.partitioningBy(d -> d.getCalories() > 500))));
+        System.out.println(System.lineSeparator());
+
+        System.out.println(menu.stream().collect(Collectors.partitioningBy(Dish::isVegetarian, Collectors.counting())));
+        System.out.println(System.lineSeparator());
     }
 }
